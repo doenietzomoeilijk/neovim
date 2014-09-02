@@ -3,6 +3,8 @@
 set encoding=utf-8
 let mapleader = ","
 set shortmess+=I
+set history=10000
+set undolevels=10000
 
 " Pathogen {{{
 filetype off
@@ -28,7 +30,7 @@ set bg=dark
 let g:rehash256=1
 let g:molokai_original=1
 " colorscheme molokai
-" colorscheme solarized
+colorscheme solarized
 set bg=light
 
 " A nice EOL guide column.
@@ -201,3 +203,8 @@ set shiftround
 set textwidth=80
 " }}}
 " }}}
+
+let g:airline#extensions#tabline#enabled=0
+let g:airline#extensions#tabline#show_buffers=0
+let g:airline_inactive_collapse=1
+let g:airline_powerline_fonts=1
