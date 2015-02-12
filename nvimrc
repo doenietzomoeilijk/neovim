@@ -1,5 +1,18 @@
 " vim: set filetype=vim foldmethod=marker foldlevel=1 foldcolumn=0 et tw=78:"{{{
 
+" Plug {{{
+call plug#begin('~/.nvim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/ctrlp-register'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+call plug#end()
+" }}}
+
 set encoding=utf-8
 let mapleader = ","
 set shortmess+=I
@@ -7,12 +20,16 @@ set history=10000
 set undolevels=10000
 
 " Pathogen {{{
-filetype off
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
-syntax enable
-filetype plugin indent on
+" filetype off
+" runtime bundle/vim-pathogen/autoload/pathogen.vim
+" execute pathogen#infect()
+" execute pathogen#helptags()
+" syntax enable
+" filetype plugin indent on
+" }}}
+
+" CtrlP {{{
+nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
 " }}}
 
 " UI {{{
@@ -31,7 +48,7 @@ let g:rehash256=1
 let g:molokai_original=1
 " colorscheme molokai
 colorscheme solarized
-set bg=light
+" set bg=light
 
 " A nice EOL guide column.
 if exists("&colorcolumn")
@@ -208,3 +225,27 @@ let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
 let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_alt_sep = '⮁'
+let g:airline_left_sep = '⮀'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_right_sep = '⮂'
+let g:airline_section_y = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '⭡'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.whitespace = 'Ξ'
+
+if has('nvim')
+    set unnamedclip
+endif
