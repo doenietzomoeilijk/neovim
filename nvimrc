@@ -10,6 +10,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'rking/ag.vim'
 call plug#end()
 " }}}
 
@@ -18,15 +19,6 @@ let mapleader = ","
 set shortmess+=I
 set history=10000
 set undolevels=10000
-
-" Pathogen {{{
-" filetype off
-" runtime bundle/vim-pathogen/autoload/pathogen.vim
-" execute pathogen#infect()
-" execute pathogen#helptags()
-" syntax enable
-" filetype plugin indent on
-" }}}
 
 " CtrlP {{{
 nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
@@ -221,6 +213,11 @@ set textwidth=80
 " }}}
 " }}}
 
+" Files {{{
+set directory=/tmp//
+" }}}
+
+" Airline {{{
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
@@ -249,3 +246,4 @@ let g:airline_symbols.whitespace = 'Ξ'
 if has('nvim')
     set unnamedclip
 endif
+" }}}
