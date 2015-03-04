@@ -10,7 +10,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'raimondi/delimitMate'
 Plug 'rking/ag.vim'
+" Plug 'SirVer/ultisnips'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 call plug#end()
 " }}}
 
@@ -116,14 +121,15 @@ set wildmode=list:longest,full
 set viewoptions-=options
 augroup UI
     autocmd!
-    autocmd BufWritePost *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      mkview
-    \|  endif
-    autocmd BufRead *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      silent loadview
-    \|  endif
+
+    " autocmd BufWritePost *
+    " \   if expand('%') != '' && &buftype !~ 'nofile'
+    " \|      mkview
+    " \|  endif
+    " autocmd BufRead *
+    " \   if expand('%') != '' && &buftype !~ 'nofile'
+    " \|      silent loadview
+    " \|  endif
 
     " Resize windows on metawindow resize
     autocmd VimResized * exe "normal! \<C-w>="
@@ -244,6 +250,23 @@ let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.whitespace = 'Ξ'
 
 if has('nvim')
-    set unnamedclip
+    " set unnamedclip
 endif
+" }}}
+
+" Editing the nvimrc file {{{
+" From http://github.com/devjj/vim-config/blob/master/.vimrc After editing, run
+augroup Vimrc
+    autocmd!
+    autocmd FileType vim setlocal keywordprg=:help
+
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC | exec 'echom "nvimrc reloaded after save."'
+
+    if (exists(':AirlineRefresh'))
+        autocmd BufWritePost $MYVIMRC AirlineRefresh
+    endif
+augroup END
+
+noremap <Leader>vv :vsplit $MYVIMRC<CR>
+noremap <Leader>V :source $MYVIMRC<CR>:filetype detect<CR>:echom 'nvimrc reloaded'<CR>
 " }}}
