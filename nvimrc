@@ -10,12 +10,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
 Plug 'airblade/vim-gitgutter'
 Plug 'raimondi/delimitMate'
 Plug 'rking/ag.vim'
 " Plug 'SirVer/ultisnips'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'scrooloose/nerdtree'
+Plug 'elzr/vim-json'
+Plug 'AndrewRadev/splitjoin.vim'
 call plug#end()
 " }}}
 
@@ -88,7 +92,8 @@ set ignorecase smartcase
 set nowrap " We just CODE to the correct width, bitches!
 set whichwrap+=<,>,h,l
 set linebreak
-set showbreak=~\ \ \ 
+set showbreak=↪︎\ 
+set breakindent
 
 " Split stuff
 set equalalways
@@ -216,6 +221,7 @@ set smarttab
 set expandtab
 set shiftround
 set textwidth=80
+set fdm=indent
 " }}}
 " }}}
 
