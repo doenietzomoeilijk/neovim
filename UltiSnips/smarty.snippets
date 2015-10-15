@@ -1,0 +1,31 @@
+priority -50
+extends html
+
+snippet foreach "foreach" b
+{foreach ${1:iterable} as $${2:item}}
+	$3${4:
+{foreachelse}
+	$5}
+{/foreach}
+endsnippet
+
+snippet if "if" b
+{if ${1:expression}}
+	$2${3:
+{else}
+	$4}
+{/if}
+endsnippet
+
+# Framework-specific
+snippet pos "positie" b
+{$this-posititie('$1')}
+endsnippet
+
+snippet skin "skin" b
+{$this->core()->skin('$1')}
+endsnippet
+
+snippet url "url" b
+{$this->core()->url($1${2:, ${3:true${4: for absolute}}})}
+endsnippet

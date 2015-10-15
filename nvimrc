@@ -14,12 +14,15 @@ Plug 'tpope/vim-abolish'
 Plug 'airblade/vim-gitgutter'
 Plug 'raimondi/delimitMate'
 Plug 'rking/ag.vim'
-" Plug 'SirVer/ultisnips'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'scrooloose/nerdtree'
 Plug 'elzr/vim-json'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 " }}}
 
@@ -30,7 +33,10 @@ set history=10000
 set undolevels=10000
 
 " CtrlP {{{
-nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
+" nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
+nnoremap <leader>m :CtrlPMRUFiles<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>q :CtrlPQuickfix<CR>
 " }}}
 
 " UI {{{
@@ -243,14 +249,13 @@ let g:airline_left_sep = '⮀'
 let g:airline_right_alt_sep = '⮃'
 let g:airline_right_sep = '⮂'
 let g:airline_section_y = ''
-let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '⭡'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.whitespace = 'Ξ'
@@ -275,4 +280,24 @@ augroup END
 
 noremap <Leader>vv :vsplit $MYVIMRC<CR>
 noremap <Leader>V :source $MYVIMRC<CR>:filetype detect<CR>:echom 'nvimrc reloaded'<CR>
+" }}}
+
+" Vim Easy Align mappings {{{
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" }}}
+
+" UltiSnips + YCM {{{
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " }}}

@@ -1,0 +1,268 @@
+global !p
+def camelcase(t):
+	return t[0].capitalize() + t[1:]
+endglobal
+
+snippet /* "Docblock"
+/**
+ * ${1}
+ */
+endsnippet
+
+snippet php "PHP File"
+<?php
+/**
+ * ${1:A short description of what this file does.}
+ *
+ * @copyright ${2:Van der Let & Partners Identity}
+ */
+
+endsnippet
+
+snippet "rgs( (\S+))?" "Getter/Setter" !br
+/**
+ * Getter voor ${1:`!p snip.rv = match.group(2) if match.group(1) is not None else "var"`}.
+ * 
+ * @return ${2:type} \$$1
+ */
+public function get`!p snip.rv = camelcase(t[0])`()
+{
+	return \$this->$1;
+}
+endsnippet
+
+snippet class "Class" !b
+/**
+ * Class ${1:`!p snip.rv = camelcase(snip.fn.split('.')[0])`}
+ */
+class $1${2: }
+{
+	${3}
+}
+endsnippet
+
+snippet classi "Class iterator" !b
+/**
+ * Class ${1:`!p snip.rv = camelcase(snip.fn.split('.')[0])`}
+ */
+class $1 implements \Iterator
+{
+    /**
+     * Table name.
+     *
+     * @type string $table
+     */
+    private $table = '${2}';
+
+    /**
+     * Database holder.
+     *
+     * @type \Doctrine\DBAL\Connection $db
+     */
+    private $db;
+
+    /**
+     * Statement holder.
+     *
+     * @type \Doctrine\DBAL\Driver\PDOStatement type $stmt
+     */
+    private $stmt;
+
+    /**
+     * Holder for data.
+     *
+     * @type array $array
+     */
+    private $array = array();
+
+    /**
+     * Pointer for data array.
+     *
+     * @type integer $position
+     */
+    private $position = 0;
+
+    /**
+     * Constructor.
+     *
+     * @param \Doctrine\DBAL\Connection $db
+     */
+    public function __construct(\Doctrine\DBAL\Connection $db)
+    {
+        $this->db = $db;
+    }
+
+    public function rewind()
+    {
+        $this->position = 0;
+    }
+
+    public function current()
+    {
+        return $this->array[$this->position];
+    }
+
+    public function key()
+    {
+        return $this->position;
+    }
+
+    public function next()
+    {
+        ++$this->position;
+    }
+
+    public function valid()
+    {
+        return isset($this->array[$this->position]);
+    }
+
+    /**
+     * How many did we get?
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->array);
+    }
+
+    /**
+     * Reset the data.
+     *
+     * @return void
+     */
+    private function reset()
+    {
+        $this->array = array();
+        $this->stmt = null;
+        $this->position = 0;
+    }
+}
+endsnippet
+
+snippet fun "PHP Function" !b
+/**
+ * ${4:Brief description.}
+ * 
+ * ${5}@return ${6:void}
+ */
+${1}function ${2:functionName}(${3})
+{
+    ${VISUAL:\/\/ function body}
+}
+endsnippet
+
+snippet prif "Private function" !b
+/**
+ * ${3:Brief}
+ * 
+ * ${4}@return ${5:void}
+ */
+private function ${1:functionName}(${2})
+{
+    ${VISUAL:\/\/ function body}
+}
+endsnippet
+
+snippet pubf "Public method" !b
+/**
+ * ${3:Brief}
+ *
+ * ${4}@return ${5:void}
+ */
+public function ${1:functionName}(${2})
+{
+    ${VISUAL:\/\/ function body}
+}
+endsnippet
+
+snippet afun "PHP anonymous function"
+function (${1})${2: use (${3})} {${4:${VISUAL}}}
+endsnippet
+
+snippet construct "__construct()" b
+/**
+ * @param $2mixed ${1/, /\n     * \@param mixed /g}
+ */
+public function __construct(${1:$dependencies})
+{${1/\$(\w+)(, )*/\n        $this->$1 = $$1;/g}
+}
+$0
+endsnippet
+
+snippet var "Class property" !b
+/**
+ * @type ${2:type} $${3:varname}
+ */
+${1:private|public|protected} \$$3${4: = initial value};
+endsnippet
+
+snippet const "Class constant" !b
+/**
+ * @type ${2:type} $1
+ */
+const ${1:varname} = ${3:initial value};
+endsnippet
+
+snippet die "die(var_dump())" !b
+die(var_dump(${1:${VISUAL/;$//g}}));
+endsnippet
+
+snippet debug "DebugBar addMessage" !b
+Core::debug()->addMessage(${1:${VISUAL/;$//g}});
+endsnippet
+
+snippet zdb "Zend_Debug::dump" !b
+Zend_Debug::dump(${1:${VISUAL/;$//g}});
+endsnippet
+
+snippet vdlp "VDLP Copyright" !b
+Van der Let & Partners Identity
+endsnippet
+
+snippet getter "PHP Class Getter" b
+/*
+ * Getter for $1
+ */
+public function get${1/\w+\s*/\u$0/}()
+{
+	return $this->$1;$2
+}
+$4
+endsnippet
+
+snippet setter "PHP Class Setter" b
+/*
+ * Setter for $1
+ */
+public function set${1/\w+\s*/\u$0/}($$1)
+{
+	$this->$1 = $$1;$3
+	${4:return $this;}
+}
+$0
+endsnippet
+
+snippet gs "PHP Class Getter Setter" b
+/**
+ * @return ${2:integer|string|...}
+ */
+public function get${1/\w+\s*/\u$0/}()
+{
+	return $this->$1;
+}
+
+/**
+ * @param $2 $$1
+ * @return ${6:`!p snip.rv = camelcase(snip.fn.split('.')[0])`}
+ */
+public function set${1/\w+\s*/\u$0/}(${3:$2 }$$1)
+{
+	$this->$1 = $$1;
+
+	return $this;
+}
+$4
+endsnippet
+
