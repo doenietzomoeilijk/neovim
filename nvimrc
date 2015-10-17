@@ -23,6 +23,7 @@ Plug 'elzr/vim-json'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/vim-easy-align'
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 " }}}
 
