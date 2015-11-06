@@ -310,3 +310,12 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_php_phpcs_args='--standard=PSR2'
 " }}}
+
+" GutenTags {{{
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
+let g:gutentags_generate_on_write = 0
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_exclude = ['/usr/local']
+let g:gutentags_ctags_executable_php = 'phpctags'
+" }}}
