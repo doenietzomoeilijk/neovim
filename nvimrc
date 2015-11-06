@@ -19,6 +19,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'elzr/vim-json'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -301,4 +302,11 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" }}}
+
+" Syntastic {{{
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_php_phpcs_args='--standard=PSR2'
 " }}}
