@@ -151,6 +151,9 @@ augroup END
 " Visually select the last edited/pasted/... text.
 nnoremap gV `[v`]
 
+set fillchars=vert:│,fold:-
+highlight VertSplit cterm=none ctermbg=none ctermfg=247
+
 " Movement {{{
 " Quick jumping between splits and buffers
 " nnoremap <C-J> <C-W>j
