@@ -1,3 +1,5 @@
 view/
 plugged
 .netrwhist
+node_modules
+plug.vim.old
