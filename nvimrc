@@ -1,4 +1,4 @@
-" vim: set filetype=vim foldmethod=marker foldlevel=1 foldcolumn=0 et tw=78:"{{{
+" vim: set filetype=vim foldmethod=marker foldlevel=0 foldcolumn=0 et tw=78:
 
 " Plug {{{
 call plug#begin('~/.nvim/plugged')
