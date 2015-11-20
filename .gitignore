@@ -1,5 +1,5 @@
 view/
 plugged
 .netrwhist
+autoload/plug.vim.old
 node_modules
-plug.vim.old
