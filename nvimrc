@@ -19,11 +19,13 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'elzr/vim-json'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'jeanmenezes/vim-jinja'
 call plug#end()
 " }}}
 
@@ -157,6 +159,9 @@ augroup END
 " Visually select the last edited/pasted/... text.
 nnoremap gV `[v`]
 
+set fillchars=vert:│,fold:-
+highlight VertSplit cterm=none ctermbg=none ctermfg=247
+
 " Movement {{{
 " Quick jumping between splits and buffers
 " nnoremap <C-J> <C-W>j
@@ -241,6 +246,12 @@ set fdm=indent
 
 " Files {{{
 set directory=/tmp//
+" File types: htmljinja {{{
+augroup Htmljinja
+    autocmd!
+    autocmd FileType twig setlocal ft=htmljinja
+augroup END
+" }}}
 " }}}
 
 " Airline {{{
@@ -285,4 +296,20 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" }}}
+
+" Syntastic {{{
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_php_phpcs_args='--standard=PSR2'
+" }}}
+
+" GutenTags {{{
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
+let g:gutentags_generate_on_write = 0
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_exclude = ['/usr/local']
+let g:gutentags_ctags_executable_php = 'phpctags'
 " }}}
