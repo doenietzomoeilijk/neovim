@@ -25,6 +25,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'jeanmenezes/vim-jinja'
 call plug#end()
 " }}}
 
@@ -158,6 +159,9 @@ augroup END
 " Visually select the last edited/pasted/... text.
 nnoremap gV `[v`]
 
+set fillchars=vert:│,fold:-
+highlight VertSplit cterm=none ctermbg=none ctermfg=247
+
 " Movement {{{
 " Quick jumping between splits and buffers
 " nnoremap <C-J> <C-W>j
@@ -242,6 +246,12 @@ set fdm=indent
 
 " Files {{{
 set directory=/tmp//
+" File types: htmljinja {{{
+augroup Htmljinja
+    autocmd!
+    autocmd FileType twig setlocal ft=htmljinja
+augroup END
+" }}}
 " }}}
 
 " Airline {{{
