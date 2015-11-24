@@ -1,7 +1,7 @@
 " vim: set filetype=vim foldmethod=marker foldlevel=1 foldcolumn=0 et tw=78:"{{{
 
 " Plug {{{
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
@@ -56,6 +56,7 @@ let g:rehash256=1
 let g:molokai_original=1
 " colorscheme molokai
 colorscheme solarized
+colorscheme PaperColor
 " set bg=light
 
 " A nice EOL guide column.
