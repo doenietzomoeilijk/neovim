@@ -1,4 +1,4 @@
-" vim: set filetype=vim foldmethod=marker foldlevel=1 foldcolumn=0 et tw=78:"{{{
+" vim: set filetype=vim foldmethod=marker foldlevel=0 foldcolumn=0 et tw=78:
 
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -19,11 +19,13 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'elzr/vim-json'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'jeanmenezes/vim-jinja'
 call plug#end()
 " }}}
 
@@ -32,6 +34,12 @@ let mapleader = ","
 set shortmess+=I
 set history=10000
 set undolevels=10000
+
+" NeoVim {{{
+if has('nvim')
+    " set unnamedclip
+endif
+" }}}
 
 " CtrlP {{{
 " nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
@@ -151,6 +159,9 @@ augroup END
 " Visually select the last edited/pasted/... text.
 nnoremap gV `[v`]
 
+set fillchars=vert:│,fold:-
+highlight VertSplit cterm=none ctermbg=none ctermfg=247
+
 " Movement {{{
 " Quick jumping between splits and buffers
 " nnoremap <C-J> <C-W>j
@@ -235,6 +246,12 @@ set fdm=indent
 
 " Files {{{
 set directory=/tmp//
+" File types: htmljinja {{{
+augroup Htmljinja
+    autocmd!
+    autocmd FileType twig setlocal ft=htmljinja
+augroup END
+" }}}
 " }}}
 
 " Airline {{{
@@ -242,29 +259,6 @@ let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
 let g:airline_powerline_fonts=1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_alt_sep = '⮁'
-let g:airline_left_sep = '⮀'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_right_sep = '⮂'
-let g:airline_section_y = ''
-let g:airline_symbols.branch = '⭠'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '⭡'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.whitespace = 'Ξ'
-
-if has('nvim')
-    " set unnamedclip
-endif
 " }}}
 
 " Editing the nvimrc file {{{
@@ -302,4 +296,29 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" }}}
+
+" Syntastic {{{
+let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_php_phpcs_args='--standard=PSR2'
+" }}}
+
+" GutenTags {{{
+let g:gutentags_generate_on_missing = 0
+let g:gutentags_generate_on_new = 0
+let g:gutentags_generate_on_write = 0
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_exclude = ['/usr/local']
+let g:gutentags_ctags_executable_php = 'phpctags'
+" }}}
+
+" NERDTree {{{
+" Lifted from https://github.com/krampstudio/webvim
+if exists("NERDTree")
+    nnoremap <c-n> :NERDTreeToggle<CR>
+    let g:NERDTreeShowHidden=1
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+end
 " }}}
