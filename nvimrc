@@ -26,6 +26,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'jeanmenezes/vim-jinja'
+Plug 'moll/vim-bbye'
 call plug#end()
 " }}}
 
