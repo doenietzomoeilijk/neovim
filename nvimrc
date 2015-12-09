@@ -1,41 +1,49 @@
 " vim: set filetype=vim foldmethod=marker foldlevel=0 foldcolumn=0 et tw=78:
 
-" Plug {{{
-call plug#begin('~/.config/nvim/plugged')
-Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
-Plug 'mattn/ctrlp-register'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vinegar'
-Plug 'airblade/vim-gitgutter'
-Plug 'raimondi/delimitMate'
-Plug 'rking/ag.vim'
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'elzr/vim-json'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/vim-easy-align'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'jeanmenezes/vim-jinja'
-Plug 'moll/vim-bbye'
-call plug#end()
-" }}}
-
-set encoding=utf-8
 let mapleader = ","
 set shortmess+=I
 set history=10000
 set undolevels=10000
+
+" Plug {{{
+call plug#begin('~/.config/nvim/plugged')
+" Bling
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'NLKNguyen/papercolor-theme'
+
+" UI
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/ctrlp-register'
+Plug 'moll/vim-bbye'
+
+" Filetypes
+Plug 'elzr/vim-json'
+Plug 'jeanmenezes/vim-jinja'
+
+" Integration
+Plug 'airblade/vim-gitgutter'
+Plug 'benekastah/neomake'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+
+" Editing
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'ervandew/supertab'
+Plug 'junegunn/vim-easy-align'
+Plug 'raimondi/delimitMate'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+
+call plug#end()
+" }}}
 
 " NeoVim {{{
 if has('nvim')
@@ -62,17 +70,15 @@ set t_ut=
 
 set bg=dark
 " colorscheme xoria256
+" colorscheme molokai
+" colorscheme solarized
+colorscheme PaperColor
 let g:rehash256=1
 let g:molokai_original=1
-" colorscheme molokai
-colorscheme solarized
-colorscheme PaperColor
-" set bg=light
 
 " A nice EOL guide column.
 if exists("&colorcolumn")
   set colorcolumn=+1,+41
-  " hi ColorColumn ctermbg=237 guibg=#232526
 endif
 
 set ruler
@@ -163,6 +169,7 @@ nnoremap gV `[v`]
 
 set fillchars=vert:│,fold:-
 highlight VertSplit cterm=none ctermbg=none ctermfg=247
+" }}}
 
 " Movement {{{
 " Quick jumping between splits and buffers
@@ -190,6 +197,7 @@ set hlsearch
 set incsearch
 
 nnoremap <leader>n :nohlsearch<CR> " Setting it to enter mucked with error windows.
+nnoremap <CR> :nohlsearch<CR>
 noremap <leader>h :let @/ = ""<CR> " clear search pattern to disable hlsearch
 
 " Enable matchit.vim to make % even more useful.
@@ -244,7 +252,6 @@ set shiftround
 set textwidth=80
 set fdm=indent
 " }}}
-" }}}
 
 " Files {{{
 set directory=/tmp//
@@ -253,7 +260,6 @@ augroup Htmljinja
     autocmd!
     autocmd FileType twig setlocal ft=htmljinja
 augroup END
-" }}}
 " }}}
 
 " Airline {{{
@@ -269,7 +275,7 @@ augroup Vimrc
     autocmd!
     autocmd FileType vim setlocal keywordprg=:help
 
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC | exec 'echom "nvimrc reloaded after save."'
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC | exec ':echom "nvimrc reloaded after save."'
 
     if (exists(':AirlineRefresh'))
         autocmd BufWritePost $MYVIMRC AirlineRefresh
@@ -323,4 +329,16 @@ if exists("NERDTree")
     let g:NERDTreeShowHidden=1
     autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 end
+" }}}
+
+" NeoMake {{{
+augroup NeoMake
+    autocmd!
+    autocmd! BufWritePost * Neomake
+augroup END
+" }}}
+
+" SplitJoin {{{
+nmap sj :SplitjoinSplit<CR>
+nmap sk :SplitjoinJoin<CR>
 " }}}
