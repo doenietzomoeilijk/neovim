@@ -20,6 +20,7 @@ Plug 'moll/vim-bbye'
 " Filetypes
 Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
+Plug 'evanmiller/nginx-vim-syntax'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
