@@ -54,8 +54,8 @@ endif
 
 " CtrlP {{{
 " nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
-nnoremap <leader>m :CtrlPMRUFiles<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
+" nnoremap <leader>m :CtrlPMRUFiles<CR>
+" nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
 " }}}
 
@@ -198,7 +198,7 @@ set hlsearch
 set incsearch
 
 nnoremap <leader>n :nohlsearch<CR> " Setting it to enter mucked with error windows.
-nnoremap <CR> :nohlsearch<CR>
+" nnoremap <CR> :nohlsearch<CR>
 noremap <leader>h :let @/ = ""<CR> " clear search pattern to disable hlsearch
 
 " Enable matchit.vim to make % even more useful.
@@ -267,7 +267,7 @@ augroup END
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 " }}}
 
 " Editing the nvimrc file {{{
@@ -342,4 +342,42 @@ augroup END
 " SplitJoin {{{
 nmap sj :SplitjoinSplit<CR>
 nmap sk :SplitjoinJoin<CR>
+" }}}
+
+" FZF {{{
+command! FZFMru call fzf#run({
+\ 'source':  reverse(s:all_files()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+
+
+function! s:all_files()
+  return extend(
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+endfunction
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+command! FZFBuffers call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })
+
+nnoremap <leader>m :FZFMru<CR>
+nnoremap <leader>b :FZFBuffers<CR>
+nnoremap <silent> <Leader><Enter> :FZFBuffers<CR>
 " }}}
