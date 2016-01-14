@@ -21,6 +21,7 @@ Plug 'moll/vim-bbye'
 Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
 Plug 'evanmiller/nginx-vim-syntax'
+Plug 'docker/docker'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
@@ -32,9 +33,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
 " Editing
+if has("python")
+    " Only do these if we have python, otherwise this trips balls on some
+    " setups.
+    Plug 'SirVer/ultisnips'
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+endif
+
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'raimondi/delimitMate'
