@@ -331,11 +331,9 @@ let g:gutentags_ctags_executable_php = 'phpctags'
 
 " NERDTree {{{
 " Lifted from https://github.com/krampstudio/webvim
-if exists("NERDTree")
-    nnoremap <c-n> :NERDTreeToggle<CR>
-    let g:NERDTreeShowHidden=1
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-end
+nnoremap <c-n> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden=1
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " }}}
 
 " NeoMake {{{
