@@ -8,7 +8,7 @@ set undolevels=10000
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 " Bling
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -22,6 +22,7 @@ Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
@@ -48,6 +49,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 " }}}
@@ -79,9 +81,10 @@ set bg=dark
 " colorscheme xoria256
 " colorscheme molokai
 " colorscheme solarized
-colorscheme PaperColor
 let g:rehash256=1
 let g:molokai_original=1
+colorscheme PaperColor
+hi Comment cterm=ITALIC
 
 " A nice EOL guide column.
 if exists("&colorcolumn")
@@ -273,7 +276,7 @@ augroup END
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 " }}}
 
 " Editing the nvimrc file {{{
