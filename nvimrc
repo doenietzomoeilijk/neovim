@@ -9,7 +9,8 @@ set undolevels=10000
 call plug#begin('~/.config/nvim/plugged')
 " Bling
 " Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
 
 " UI
@@ -277,6 +278,7 @@ let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
 let g:airline_inactive_collapse=1
 let g:airline_powerline_fonts=1
+let g:airline_theme='powerlineish'
 " }}}
 
 " Editing the nvimrc file {{{
