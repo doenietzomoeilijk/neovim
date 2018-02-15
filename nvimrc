@@ -12,11 +12,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'jdkanani/vim-material-theme'
 
 " UI
 Plug 'kien/ctrlp.vim'
 Plug 'mattn/ctrlp-register'
 Plug 'moll/vim-bbye'
+Plug 'jaxbot/semantic-highlight.vim'
 
 " Filetypes
 Plug 'elzr/vim-json'
@@ -24,6 +26,7 @@ Plug 'jeanmenezes/vim-jinja'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'ap/vim-css-color'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
@@ -34,13 +37,28 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
+Plug 'phpactor/phpactor'
+
 " Editing
 if has("python")
     " Only do these if we have python, otherwise this trips balls on some
     " setups.
     Plug 'SirVer/ultisnips'
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+    " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 endif
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'mkusher/padawan'
+Plug 'mkusher/padawan-symfony'
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
@@ -63,7 +81,7 @@ endif
 
 " CtrlP {{{
 " nnoremap <leader>r !Ccal ctrlp#init(ctrlp#register#id())!CtrlPRegisterCtrlPRegister
-" nnoremap <leader>m :CtrlPMRUFiles<CR>
+nnoremap <leader>m :CtrlPMRUFiles<CR>
 " nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
 " }}}
@@ -85,7 +103,8 @@ set bg=dark
 let g:rehash256=1
 let g:molokai_original=1
 colorscheme PaperColor
-hi Comment cterm=ITALIC
+"colorscheme material-theme
+hi Comment cterm=ITALIC gui=italic
 
 " A nice EOL guide column.
 if exists("&colorcolumn")
@@ -330,14 +349,19 @@ let g:gutentags_generate_on_missing = 0
 let g:gutentags_generate_on_new = 0
 let g:gutentags_generate_on_write = 0
 let g:gutentags_define_advanced_commands = 1
-let g:gutentags_exclude = ['/usr/local']
+let g:gutentags_ctags_exclude = ['/usr/local']
 let g:gutentags_ctags_executable_php = 'phpctags'
 " }}}
 
 " NERDTree {{{
 " Lifted from https://github.com/krampstudio/webvim
 nnoremap <c-n> :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let g:NERDTreeShowHidden=1
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeDirArrows=1
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " }}}
 
