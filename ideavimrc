@@ -1,0 +1,5 @@
+set visualbell
+set noerrorbells
+set smartcase
+set incsearch
+set surround
