@@ -1,6 +1,7 @@
 " vim: set filetype=vim foldmethod=marker foldlevel=0 foldcolumn=0 et tw=78:
 
-let mapleader = ","
+let mapleader=","
+let maplocalleader=","
 set shortmess+=I
 set history=10000
 set undolevels=10000
@@ -27,6 +28,7 @@ Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
+Plug 'freitass/todo.txt-vim'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
