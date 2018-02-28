@@ -5,6 +5,7 @@ let maplocalleader=","
 set shortmess+=I
 set history=10000
 set undolevels=10000
+set encoding="utf-8"
 
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
