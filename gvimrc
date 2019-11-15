@@ -9,6 +9,6 @@ set guioptions+=i " Icons are nifty
 set guitablabel=%M%t
 " }}}
 
-set guifont=Iosevka\ 12
+set guifont=FiraCode-Regular:h15
 
 set lines=40 columns=132

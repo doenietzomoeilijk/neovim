@@ -3,3 +3,6 @@ set noerrorbells
 set smartcase
 set incsearch
 set surround
+set number
+set relativenumber
+set clipboard+=ideaput

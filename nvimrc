@@ -5,7 +5,7 @@ let maplocalleader=","
 set shortmess+=I
 set history=10000
 set undolevels=10000
-set encoding="utf-8"
+" set encoding="unicode"
 
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -25,11 +25,12 @@ Plug 'jaxbot/semantic-highlight.vim'
 " Filetypes
 Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
-Plug 'evanmiller/nginx-vim-syntax'
+" Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
 Plug 'freitass/todo.txt-vim'
+Plug 'cyberkov/openhab-vim'
 
 " Integration
 Plug 'airblade/vim-gitgutter'
@@ -46,22 +47,22 @@ Plug 'phpactor/phpactor'
 if has("python")
     " Only do these if we have python, otherwise this trips balls on some
     " setups.
-    Plug 'SirVer/ultisnips'
+    " Plug 'SirVer/ultisnips'
     " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 endif
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
+  " Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 let g:deoplete#enable_at_startup = 1
 
-Plug 'mkusher/padawan'
-Plug 'mkusher/padawan-symfony'
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+" Plug 'mkusher/padawan'
+" Plug 'mkusher/padawan-symfony'
+" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
