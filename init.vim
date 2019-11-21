@@ -5,7 +5,7 @@ let maplocalleader=","
 set shortmess+=I
 set history=10000
 set undolevels=10000
-set encoding="utf8"
+" set encoding="utf8"
 
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
@@ -27,16 +27,17 @@ Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
-Plug 'PotatoesMaster/i3-vim-syntax'
+" Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
 Plug 'freitass/todo.txt-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Integration
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 
