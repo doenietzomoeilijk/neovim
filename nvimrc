@@ -25,7 +25,6 @@ Plug 'jaxbot/semantic-highlight.vim'
 " Filetypes
 Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
-" Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
