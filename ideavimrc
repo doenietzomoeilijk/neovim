@@ -1,8 +1,25 @@
-set visualbell
-set noerrorbells
-set smartcase
+let mapleader=,
+set hlsearch
+set ignorecase
 set incsearch
-set surround
+set noerrorbells
 set number
 set relativenumber
+set showmode
+set showcmd
+set smartcase
+set visualbell
+
+""" Plugin emulation
+set commentary
+set easymotion
+set exchange
+set multiple-cursors
+set surround
+
+""" Idea specific
 set clipboard+=ideaput
+set ideastatusicon=gray
+set idearefactormode=visual
+set ideajoin
+set ideamarks
