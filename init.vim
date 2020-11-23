@@ -25,7 +25,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 " Filetypes
 Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
-Plug 'evanmiller/nginx-vim-syntax'
+" Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
 " Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
@@ -60,9 +60,9 @@ else
 endif
 let g:deoplete#enable_at_startup = 0
 
-Plug 'mkusher/padawan'
-Plug 'mkusher/padawan-symfony'
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+" Plug 'mkusher/padawan'
+" Plug 'mkusher/padawan-symfony'
+" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
@@ -150,7 +150,7 @@ set ignorecase smartcase
 set nowrap " We just CODE to the correct width, bitches!
 set whichwrap+=<,>,h,l
 set linebreak
-set showbreak=↪︎\ 
+set showbreak=<br>
 set breakindent
 
 " Split stuff
@@ -201,7 +201,7 @@ augroup END
 " Visually select the last edited/pasted/... text.
 nnoremap gV `[v`]
 
-set fillchars=vert:│,fold:-
+set fillchars=vert:>,fold:-
 highlight VertSplit cterm=none ctermbg=none ctermfg=247
 " }}}
 
@@ -417,4 +417,12 @@ command! FZFBuffers call fzf#run({
 nnoremap <leader>m :FZFMru<CR>
 nnoremap <leader>b :FZFBuffers<CR>
 nnoremap <silent> <Leader><Enter> :FZFBuffers<CR>
+" }}}
+
+" Note taking {{{
+set suffixesadd+=.md
+if $NOTES_DIR
+    autocmd BufRead,BufNewFile $NOTES_DIR* setlocal isfname+=32
+    autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
+endif
 " }}}
