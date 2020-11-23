@@ -27,7 +27,6 @@ Plug 'elzr/vim-json'
 Plug 'jeanmenezes/vim-jinja'
 " Plug 'evanmiller/nginx-vim-syntax'
 Plug 'docker/docker'
-" Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'ap/vim-css-color'
 Plug 'freitass/todo.txt-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -60,10 +59,6 @@ else
 endif
 let g:deoplete#enable_at_startup = 0
 
-" Plug 'mkusher/padawan'
-" Plug 'mkusher/padawan-symfony'
-" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
@@ -73,7 +68,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
-
 call plug#end()
 " }}}
 
@@ -296,6 +290,13 @@ augroup Htmljinja
 augroup END
 " }}}
 
+" YAML {{{
+augroup YAML
+    autocmd!
+    autocmd FileType yaml setlocal sw=2 ts=2 et
+augroup END
+" }}}
+
 " Airline {{{
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
@@ -362,9 +363,9 @@ let g:gutentags_ctags_executable_php = 'phpctags'
 nnoremap <c-n> :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let g:NERDTreeShowHidden=1
-let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeMinimalUI=1
+let g:NERDTreeMinimalUI=0
 let g:NERDTreeDirArrows=1
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " }}}
