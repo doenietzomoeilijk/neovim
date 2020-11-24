@@ -68,6 +68,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
+
+" Wiki / Zettel
+Plug 'vimwiki/vimwiki'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'michal-h21/vim-zettel'
+Plug 'alok/notational-fzf-vim'
 call plug#end()
 " }}}
 
@@ -297,6 +304,8 @@ augroup YAML
 augroup END
 " }}}
 
+" }}}
+
 " Airline {{{
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=0
@@ -421,9 +430,27 @@ nnoremap <silent> <Leader><Enter> :FZFBuffers<CR>
 " }}}
 
 " Note taking {{{
-set suffixesadd+=.md
-if $NOTES_DIR
-    autocmd BufRead,BufNewFile $NOTES_DIR* setlocal isfname+=32
-    autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
+" let g:notes_dir = ($NOTES_DIR ? $NOTES_DIR : "~/SecondBrain")
+if !$NOTES_DIR
+    let $NOTES_DIR="~/SecondBrain"
 endif
+set suffixesadd+=.md
+autocmd BufRead,BufNewFile $NOTES_DIR* setlocal isfname+=32
+autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
+
+let g:vimwiki_list = [{'name': 'Second Brain',
+            \ 'diary_rel_path': "Daglogs/", "diary_header": "Daglogs", "diary_index": "Daglogs", "auto_diary_index": 1,
+            \ 'path': "$NOTES_DIR", 'ext':'.md', 'syntax':'markdown',
+            \ 'auto_generate_links': 1}]
+let g:vimwiki_diary_months = {
+            \ 1: 'Januari', 2: 'Februari', 3: 'Maart',
+            \ 4: 'April', 5: 'Mei', 6: 'Juni',
+            \ 7: 'Juli', 8: 'Augustus', 9: 'September',
+            \ 10: 'Oktober', 11: 'November', 12: 'December'}
+let g:zettel_format = "%raw_title"
+let g:zettel_date_format = "%Y%m%d%H%M"
+let g:zettel_link_format="[[%title]]"
+let g:nv_search_paths = ["$NOTES_DIR"]
+nnoremap <leader>zn :ZettelNew<space>
+nmap gB :NV <C-R>=expand("%:t:r")<cr><cr>
 " }}}
