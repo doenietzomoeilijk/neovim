@@ -101,15 +101,16 @@ endif
 " Clearing using background colour -- needed inside tmux.
 set t_ut=
 
-set bg=dark
+set bg=light
 " colorscheme xoria256
 " colorscheme molokai
 " colorscheme solarized
 let g:rehash256=1
 let g:molokai_original=1
 colorscheme PaperColor
-"colorscheme material-theme
+" colorscheme material-theme
 hi Comment cterm=ITALIC gui=italic
+set gfn=Hack:11
 
 " A nice EOL guide column.
 if exists("&colorcolumn")
@@ -440,7 +441,7 @@ autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
 
 let g:vimwiki_list = [{'name': 'Second Brain',
             \ 'diary_rel_path': "Daglogs/", "diary_header": "Daglogs", "diary_index": "Daglogs", "auto_diary_index": 1,
-            \ 'path': "$NOTES_DIR", 'ext':'.md', 'syntax':'markdown',
+            \ 'path': $NOTES_DIR, 'ext':'.md', 'syntax':'markdown',
             \ 'auto_generate_links': 1}]
 let g:vimwiki_diary_months = {
             \ 1: 'Januari', 2: 'Februari', 3: 'Maart',
@@ -450,7 +451,7 @@ let g:vimwiki_diary_months = {
 let g:zettel_format = "%raw_title"
 let g:zettel_date_format = "%Y%m%d%H%M"
 let g:zettel_link_format="[[%title]]"
-let g:nv_search_paths = ["$NOTES_DIR"]
+let g:nv_search_paths = [$NOTES_DIR]
 nnoremap <leader>zn :ZettelNew<space>
 nmap gB :NV <C-R>=expand("%:t:r")<cr><cr>
 " }}}
