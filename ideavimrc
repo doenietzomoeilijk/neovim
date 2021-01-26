@@ -1,14 +1,16 @@
-let mapleader=,
-set hlsearch
-set ignorecase
-set incsearch
-set noerrorbells
-set number
-set relativenumber
-set showmode
-set showcmd
-set smartcase
-set visualbell
+source ~/.vimrc
+
+" let mapleader=,
+" set hlsearch
+" set ignorecase
+" set incsearch
+" set noerrorbells
+" set number
+" set relativenumber
+" set showmode
+" set showcmd
+" set smartcase
+" set visualbell
 
 """ Plugin emulation
 set commentary

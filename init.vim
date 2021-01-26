@@ -91,6 +91,45 @@ nnoremap <leader>m :CtrlPMRUFiles<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
 " }}}
 
+" FZF {{{
+command! FZFMru call fzf#run({
+\ 'source':  reverse(s:all_files()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+
+
+function! s:all_files()
+  return extend(
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+endfunction
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+command! FZFBuffers call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })
+
+nnoremap <leader>m :FZFMru<CR>
+nnoremap <leader>b :FZFBuffers<CR>
+nnoremap <leader>f :FZF<CR>
+nnoremap <silent> <Leader><Enter> :FZFBuffers<CR>
+" }}}
+
 " UI {{{
 if &term =~ "xterm" 
     set t_Co=256
@@ -392,44 +431,6 @@ nmap sj :SplitjoinSplit<CR>
 nmap sk :SplitjoinJoin<CR>
 " }}}
 
-" FZF {{{
-command! FZFMru call fzf#run({
-\ 'source':  reverse(s:all_files()),
-\ 'sink':    'edit',
-\ 'options': '-m -x +s',
-\ 'down':    '40%' })
-
-
-function! s:all_files()
-  return extend(
-  \ filter(copy(v:oldfiles),
-  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
-  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
-endfunction
-
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-command! FZFBuffers call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2
-\ })
-
-nnoremap <leader>m :FZFMru<CR>
-nnoremap <leader>b :FZFBuffers<CR>
-nnoremap <silent> <Leader><Enter> :FZFBuffers<CR>
-" }}}
-
 " Note taking {{{
 " let g:notes_dir = ($NOTES_DIR ? $NOTES_DIR : "~/SecondBrain")
 if !$NOTES_DIR
@@ -448,9 +449,11 @@ let g:vimwiki_diary_months = {
             \ 4: 'April', 5: 'Mei', 6: 'Juni',
             \ 7: 'Juli', 8: 'Augustus', 9: 'September',
             \ 10: 'Oktober', 11: 'November', 12: 'December'}
+let g:vimwiki_global_ext = 0
 let g:zettel_format = "%raw_title"
 let g:zettel_date_format = "%Y%m%d%H%M"
 let g:zettel_link_format="[[%title]]"
+" let g:zettel_options = [{"template": $NOTES_DIR . "/_zettel_template.tpl"}]
 let g:nv_search_paths = [$NOTES_DIR]
 nnoremap <leader>zn :ZettelNew<space>
 nmap gB :NV <C-R>=expand("%:t:r")<cr><cr>
