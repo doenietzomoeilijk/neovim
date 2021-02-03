@@ -439,6 +439,7 @@ endif
 set suffixesadd+=.md
 autocmd BufRead,BufNewFile $NOTES_DIR* setlocal isfname+=32
 autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
+autocmd BufNewFile $NOTES_DIR/Daglogs/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary-template.py '%'
 
 let g:vimwiki_list = [{'name': 'Second Brain',
             \ 'diary_rel_path': "Daglogs/", "diary_header": "Daglogs", "diary_index": "Daglogs", "auto_diary_index": 1,
@@ -453,7 +454,7 @@ let g:vimwiki_global_ext = 0
 let g:zettel_format = "%raw_title"
 let g:zettel_date_format = "%Y%m%d%H%M"
 let g:zettel_link_format="[[%title]]"
-" let g:zettel_options = [{"template": $NOTES_DIR . "/_zettel_template.tpl"}]
+let g:zettel_options = [{"template": $NOTES_DIR . "/_zettel_template.tpl"}]
 let g:nv_search_paths = [$NOTES_DIR]
 nnoremap <leader>zn :ZettelNew<space>
 nmap gB :NV <C-R>=expand("%:t:r")<cr><cr>
