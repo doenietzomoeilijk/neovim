@@ -439,7 +439,7 @@ endif
 set suffixesadd+=.md
 autocmd BufRead,BufNewFile $NOTES_DIR* setlocal isfname+=32
 autocmd BufRead,BufNewFile $NOTES_DIR* setlocal path+=$NOTES_DIR/**
-autocmd BufNewFile $NOTES_DIR/Daglogs/*.md :silent 0r !~/.vim/bin/generate-vimwiki-diary-template.py '%'
+autocmd BufNewFile **/Daglogs* silent 0r !~/.vim/bin/generate-vimwiki-diary-template.py '%'
 
 let g:vimwiki_list = [{'name': 'Second Brain',
             \ 'diary_rel_path': "Daglogs/", "diary_header": "Daglogs", "diary_index": "Daglogs", "auto_diary_index": 1,

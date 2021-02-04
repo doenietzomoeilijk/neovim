@@ -4,7 +4,7 @@
 import sys
 import datetime
 
-template = """# {date}
+template = """# Daglog {date}
 
 ## Todo
 
